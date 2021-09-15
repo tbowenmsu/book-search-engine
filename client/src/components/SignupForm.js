@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+//add in useEffect
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-
-import { createUser } from '../utils/API';
+// change to useMutation from apollo
+import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
+// import ADD_USER for try/catch/mutation
+import { ADD_USER } from '../utils/auth'
 
 const SignupForm = () => {
   // set initial form state
@@ -12,6 +15,17 @@ const SignupForm = () => {
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
+  const [addUser, { error }] = useMutation(ADD_USER)
+
+  //add in useEffect hook  
+  useEffect(() => {
+    if (error) {
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
+    }
+  }, [error]);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -20,7 +34,6 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -28,18 +41,14 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await createUser(userFormData);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
+      const { data }= await addUser({
+        variables: { ...userFormData },
+      });
+      // used data instead and got rid of set show alert becuase of useEffect
+      console.log(data);
+      Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
     }
 
     setUserFormData({
