@@ -1,5 +1,5 @@
 {
-  "name": "googlebooks-app",
+  "name": "book-search-engine",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -14,5 +14,16 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.4.11",
+    "apollo": "^2.33.6",
+    "apollo-server": "^3.3.0",
+    "graphql": "^15.6.0",
+    "mongo": "^0.1.0",
+    "mongod": "^2.0.0",
+    "mongoose": "^6.0.7",
+    "mongosh": "^1.0.6",
+    "nodemon": "^2.0.12"
   }
 }
