@@ -1,5 +1,9 @@
 {
   "name": "book-search-engine",
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
