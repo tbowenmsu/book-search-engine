@@ -35,6 +35,7 @@
     "mongosh": "^1.0.6",
     "node": "^16.9.1",
     "nodemon": "^2.0.12",
-    "phoenix": "^1.6.0-rc.0"
+    "phoenix": "^1.6.0-rc.0",
+    "saslprep": "^1.0.4"
   }
 }
